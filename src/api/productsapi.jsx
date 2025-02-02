@@ -1,0 +1,19 @@
+import React from "react";
+export const getUser = async () => {
+  try {
+    const response = await fetch("https://fakestoreapi.com/products");
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    alert("Error fetching products:", error);
+  }
+};
+export const getUserById = async (id) => {
+  try {
+    const response = await fetch(`https://fakestoreapi.com/products/${id}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    alert("Error fetching products:", error);
+  }
+};
