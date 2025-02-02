@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { getUser } from "../api/productsapi";
 import { Link } from "react-router-dom";
 import Loader from "./loader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
@@ -13,8 +16,9 @@ const Products = () => {
         setProducts(data);
       } catch (error) {
         console.error("Error fetching products:", error);
+        toast.error(`Error: could not fetch the data & ${error.message}`); // Show the error toast notification
       } finally {
-        setLoading(false); // Stop loading once data is fetched
+        setLoading(false); // Stop loading once data is fetched or error occurs
       }
     };
     fetchProducts();
@@ -24,7 +28,9 @@ const Products = () => {
     <>
       <div className="txt ml-10 font-bold text-xl">Our Products</div>
 
-      {loading ? (<Loader />) : (
+      {loading ? (
+        <Loader />
+      ) : (
         <ul>
           {products.map((product, index) => (
             <li className="products" key={index}>
@@ -41,6 +47,9 @@ const Products = () => {
           ))}
         </ul>
       )}
+
+      {/* ToastContainer should be placed at the root of your component */}
+      <ToastContainer />
     </>
   );
 };
