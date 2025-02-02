@@ -1,50 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { getUser } from "../api/productsapi";
 import { Link } from "react-router-dom";
+import Loader from "./loader";
 const Products = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state
 
-    const [products, setProducts] = useState([]);
-
-    
-    
-      // Fetch data when the component mounts
-      useEffect(() => {
-        const fetchProducts = async () => {
-          const data = await getUser();
-          setProducts(data)
-        }
-        fetchProducts();
-      }, []);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await getUser();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false); // Stop loading once data is fetched
+      }
+    };
+    fetchProducts();
+  }, []);
 
   return (
     <>
-   <div className="txt ml-10 font-bold text-xl">Our Product</div>
+      <div className="txt ml-10 font-bold text-xl">Our Products</div>
 
-    <ul>
-    {products.map((products, index)=> {
-        // console.log(e.price)
-        return(
+      {loading ? (<Loader />) : (
+        <ul>
+          {products.map((product, index) => (
             <li className="products" key={index}>
-                <span className="up">
+              <span className="up">
                 <Link to={`/Details/${index}`}>
-                <img src={products.image} alt="product" />
-        
+                  <img src={product.image} alt="product" />
                 </Link>
-                </span>
-                <span className="dtl">
-                    <p className="dtl-txt font-bold ">
-                        {products.category}
-                    </p>
-                    <p className="dtl-txt">
-                        $ {products.price}
-                    </p>
-                </span>
+              </span>
+              <span className="dtl">
+                <p className="dtl-txt font-bold">{product.category}</p>
+                <p className="dtl-txt">$ {product.price}</p>
+              </span>
             </li>
-        )
-    })}
-    </ul>
+          ))}
+        </ul>
+      )}
     </>
-  )
+  );
 };
 
 export default Products;
