@@ -16,7 +16,7 @@ const Products = () => {
         setProducts(data);
       } catch (error) {
         console.error("Error fetching products:", error);
-        toast.error(`Error: could not fetch the data & ${error.message}`); // Show the error toast notification
+        toast.error(`Error: could not fetch the data ; ${error.message}`); // Show the error toast notification
       } finally {
         setLoading(false); // Stop loading once data is fetched or error occurs
       }

@@ -2,6 +2,10 @@ import React, {useState, useEffect} from 'react'
 import { useParams } from "react-router-dom"; 
 import { getUserById } from '../api/productsapi'
 import Loader from '../components/loader';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
 const ProductDetails = () => {
 
   const { id } = useParams();
@@ -13,7 +17,7 @@ const ProductDetails = () => {
       const data = await getUserById(id)
       setProduct(data);
      } catch (error) {
-
+      toast.error(`Error: could not fetch the data ; ${error.message}`);
       
      }finally{
       setLoading(false);
@@ -48,7 +52,7 @@ const ProductDetails = () => {
     
     
        </main>)
-    }
+    } <ToastContainer />
     </>
   )
 }
