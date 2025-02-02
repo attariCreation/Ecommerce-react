@@ -4,7 +4,7 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import "./App.css";
 import ProductDetails from "./pages/ProductDetails";
-import Home from "./pages/Home";
+import Home from "./pages/home";
 import Header from "./components/Header"
 import { BrowserRouter , Routes, Route } from "react-router-dom";
 function App() {
