@@ -8,7 +8,8 @@ export const getUser = async () => {
 };
 export const getUserById = async (id) => {
  
-    const response = await fetch(`https://fakestoreapi.com/products/${id}`);
+    const response = await fetch(`https://fakestoreapi.com/products/${id + 1}`);
     const data = await response.json();
+    // console.log("Fetched product data:", data)
     return data;
 };
