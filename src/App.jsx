@@ -1,3 +1,4 @@
+import React from 'react';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -6,21 +7,21 @@ import "./App.css";
 import ProductDetails from "./pages/ProductDetails";
 import Home from "./pages/home";
 import Cart from "./components/Cart";
-import Header from "./components/Header"
-import { BrowserRouter , Routes, Route } from "react-router-dom";
+import Login from './pages/Login'
+import { BrowserRouter as Router , Routes, Route } from "react-router-dom";
 function App() {
 
   return (
     <>
-    <BrowserRouter>
-    <Header />
-    <Routes>
+    <Router>
+      <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/Details/:id" element={<ProductDetails/>}/>
       <Route path="/cart" element={<Cart />} />
-     
+      <Route path='/Login' element={<Login />} />  
     </Routes>
-    </BrowserRouter> </>
+    </Router>
+     </>
   );
 }
 

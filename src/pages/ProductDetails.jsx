@@ -3,14 +3,14 @@ import { useParams } from "react-router-dom";
 import { getUserById } from '../api/productsapi';
 import Loader from '../components/loader';
 import { ToastContainer, toast } from "react-toastify";
+import Header from '../components/Header'
 import "react-toastify/dist/ReactToastify.css";
-
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+    useEffect(() => {
     const fetchProduct = async () => {
       try {
         const data = await getUserById(id);
@@ -29,9 +29,11 @@ const ProductDetails = () => {
   }, [product])
   return (
     <>
+    <Header />
       {loading ? 
         (<Loader />) :
         (
+
           <main className='flex flex-col items-center justify-center overflow-hidden'>
             <div id='product-detail-img' className='rounded-xl'>
               <img src={product.image} alt="product" />

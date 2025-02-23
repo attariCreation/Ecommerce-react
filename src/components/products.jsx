@@ -2,17 +2,31 @@ import React, { useEffect, useState } from "react";
 import { getUser } from "../api/productsapi";
 import { Link } from "react-router-dom";
 import Loader from "./loader";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/cartSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CiShoppingCart } from "react-icons/ci";
 import { FiShoppingCart } from "react-icons/fi";
-import { useCart } from "../context/Cart";
+
 const Products = () => {
+  
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
-  const { addToCart } = useCart();
+  const notify = () => {
+    toast.success("Operation successful!", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "light",
+    });
+  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -20,7 +34,18 @@ const Products = () => {
         const data = await getUser();
         setProducts(data);
       } catch (error) {
-        toast.error(`Error: could not fetch the data ; ${error.message}`);
+        toast.error(`Error: could not fetch the data ; ${error.message}`, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          style: {
+            background: "#C0392B", // Customize error toast background
+            color: "#ECF0F1", // Customize text color
+          },
+        });
       } finally {
         setLoading(false);
       }
@@ -54,13 +79,11 @@ const Products = () => {
                     setHoveredIndex(null);
                   }}
                   onClick={() => {
-                    addToCart(product)
-                    console.log(product.id)
+                    dispatch(addToCart(product));
+                    notify();
                   }}
                   id="right"
-                  className="text-xl
-                  outline-hidden
-                  "
+                  className="text-xl outline-hidden"
                 >
                   {hoveredIndex === index ? (
                     <FiShoppingCart />
@@ -73,8 +96,21 @@ const Products = () => {
           ))}
         </ul>
       )}
-
-      <ToastContainer />
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover
+        style={{
+          background: "#34495E", // Customize toast container background
+          color: "#ECF0F1", // Customize text color
+        }}
+      />
     </>
   );
 };

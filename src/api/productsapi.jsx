@@ -1,4 +1,3 @@
-import React from "react";
 export const getUser = async () => {
   
     const response = await fetch("https://fakestoreapi.com/products");

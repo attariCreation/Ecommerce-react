@@ -1,4 +1,3 @@
-import React from 'react';
 import Id from '../assets/person.png';
 
 const Footer = () => {
