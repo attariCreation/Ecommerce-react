@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const initialState = {
     userName: localStorage.getItem("userName") || "",
@@ -14,18 +14,21 @@ const loginSlice = createSlice({
     initialState, 
     reducers: {
         loginUser: (state, action) => {
+
             state.loading = true;
             state.error = false;
 
             if (action.payload.userName && action.payload.password) {
                 const userData = {
                     userName: action.payload.userName,
-                    token: "dummy-token-123", // Fake token
+                    token: nanoid(), // Fake token
+                    password: action.payload.password,
                 };
 
-                localStorage.setItem("user", JSON.stringify(userData));
-                localStorage.setItem("token", userData.token);
-                localStorage.setItem("userName", userData.userName);
+                // localStorage.setItem("user", JSON.stringify(userData));
+                // localStorage.setItem("token", userData.token);
+                // localStorage.setItem("userName", userData.userName);
+                // localStorage.setItem("password", userData.password);
 
                 state.userName = userData.userName;
                 state.token = userData.token;
