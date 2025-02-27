@@ -10,10 +10,7 @@ const Cart = () => {
   const navigate = useNavigate();
   const {cart} = useSelector((state) => state.cart)
   const {token } = useSelector(state => state.login)
-  // useEffect(() => {
-  //   console.log("cart", cart, "fn", removeFromCart);
-  // }, [cart]);
-
+  
   useEffect(() => {
     if(!token){
       navigate('/login')
