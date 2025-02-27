@@ -16,10 +16,6 @@ const store = configureStore({
         cart: persistedCartReducer,
         login: persistedLoginReducer, 
     }, 
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: false, // Needed for Redux Persist
-        }),
 })
 const persistor = persistStore(store)
 export default store;

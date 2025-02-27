@@ -1,5 +1,4 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
-
 const initialState = {
     userName: localStorage.getItem("userName") || "",
     password: "", 
@@ -46,8 +45,7 @@ const loginSlice = createSlice({
             state.token = null;
             state.isLogin = false;
             state.error = false;
-
-            localStorage.removeItem("user");
+             localStorage.removeItem("user");
             localStorage.removeItem("token");
             localStorage.removeItem("userName");
         }

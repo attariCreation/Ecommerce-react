@@ -41,7 +41,7 @@ const Login = () => {
           <TextField
             required
             fullWidth
-            label="Email"
+            label="Your Name"
             variant="outlined"
             name="userName"
             onChange={handleChange}

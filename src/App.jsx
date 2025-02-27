@@ -9,13 +9,14 @@ import Home from "./pages/home";
 import Cart from "./components/Cart";
 import Login from './pages/Login'
 import { BrowserRouter as Router , Routes, Route } from "react-router-dom";
-function App() {
 
+function App() {
+ 
   return (
     <>
         <Router>
       <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Home/>} />
       <Route path="/Details/:id" element={<ProductDetails/>}/>
       <Route path="/cart" element={<Cart />} />
       <Route path='/Login' element={<Login />} />  

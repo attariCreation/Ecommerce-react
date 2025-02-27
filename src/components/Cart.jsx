@@ -3,13 +3,23 @@ import { useDispatch } from "react-redux";
 import { removeFromCart } from "../redux/cartSlice";
 import { useSelector } from "react-redux";
 import Header from '../components/Header'
+import { useNavigate } from "react-router-dom";
+import { logoutUser } from "../redux/loginSlice";
 const Cart = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {cart} = useSelector((state) => state.cart)
-  useEffect(() => {
-    console.log("cart", cart, "fn", removeFromCart);
-  }, [cart]);
+  const {token } = useSelector(state => state.login)
+  // useEffect(() => {
+  //   console.log("cart", cart, "fn", removeFromCart);
+  // }, [cart]);
 
+  useEffect(() => {
+    if(!token){
+      navigate('/login')
+      dispatch(logoutUser())
+    }
+  } , [token])
   return (
     <>
       <Header />

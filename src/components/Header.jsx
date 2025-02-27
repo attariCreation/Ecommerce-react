@@ -1,9 +1,11 @@
 import React from "react";
 import { FaCartShopping } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {logoutUser} from '../redux/loginSlice'
-const Header = (props) => {
+
+const Header = () => {
+  const {userName} = useSelector( state => state.login )
   const dispatch = useDispatch();
   const handleLogOut = () => {
     dispatch(logoutUser())
@@ -13,7 +15,7 @@ const Header = (props) => {
       <nav>
         <div id="left">
           <span id="logo-hdr" className="font-bold text-xl capitalize">
-            {props.userName}
+            {userName}
           </span>
         </div>
         <div id="right" className="flex items-center justify-evenly gap-10">

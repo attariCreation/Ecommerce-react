@@ -7,16 +7,23 @@ import Header from '../components/Header'
 import "react-toastify/dist/ReactToastify.css";
 const ProductDetails = () => {
   const { id } = useParams();
+  const ID = parseInt(id)
+
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
 
     useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const data = await getUserById(id);
+        const data = await getUserById(ID);
         setProduct(data);
+        console.log(" try block console",data)
       } catch (error) {
         toast.error(`Error: ${error.message}`);
+        console.log(" first checkup", product)
+        const data2 = getUserById(ID);
+        console.log("second checkup", data2)
+
       } finally {
         setLoading(false);
         console.log(product)
@@ -24,9 +31,9 @@ const ProductDetails = () => {
     };
     fetchProduct();
   }, [id]);
-  useEffect(()=> {
-    console.log(product)
-  }, [product])
+  // useEffect(()=> {
+  //   console.log(product)
+  // }, [product])
   return (
     <>
     <Header />
